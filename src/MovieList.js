@@ -1,4 +1,3 @@
-// MovieList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -23,7 +22,8 @@ const MovieList = () => {
     try {
       const response = await axios.delete(`http://localhost:5000/movies/movieslist/delete/${id}`);
       console.log('Movie deleted:', response.data);
-      setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== id));
+      alert(response.data.message);
+      window.location.reload()
     } catch (error) {
       console.error('Error deleting movie:', error.message);
     }
@@ -40,25 +40,36 @@ const MovieList = () => {
   };
 
   return (
-    <div>
+    <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }}
+  >
+    <div className='container'>
+      <br/>
       <h2>All Movies</h2>
-      <ul>
+      <ol>
         {movies.map((movie) => (
           <li key={movie.id}>
             <strong>{movie.title}</strong>
+            <p></p>
             <button onClick={() => handleGetDetails(movie.id)}>Get Details</button>
             <button onClick={() => handleDeleteMovie(movie.id)}>Delete</button>
           </li>
         ))}
-      </ul>
-
+      </ol>
+      <br/>
       {selectedMovie && (
-        <div>
+        <div className='card'>
           <h3>Details of Selected Movie</h3>
-          <p>Title: {selectedMovie.title}</p>
-          <p>Director: {selectedMovie.director.name}</p>
+          <hr/>
+          <p><strong>Title: </strong>{selectedMovie.title}</p>
+          <p><strong>Director:</strong> {selectedMovie.director.name}</p>
         </div>
       )}
+      </div>
     </div>
   );
 };

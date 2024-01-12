@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import MovieForm from './MovieForm';
 import MovieList from './MovieList';
@@ -6,9 +5,17 @@ import MovieList from './MovieList';
 function App() {
   return (
     <div className="App">
-      <h1>Movie App</h1>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-4'>
       <MovieForm />
-      <MovieList />
+      </div>
+      <div className='col-2'></div>
+      <div className='col-6'>
+        <MovieList />
+        </div>
+    </div>
+    </div>
     </div>
   );
 }

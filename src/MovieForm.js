@@ -1,4 +1,3 @@
-// MovieForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -19,6 +18,7 @@ const MovieForm = () => {
 
       if (response && response.data) {
         console.log('Movie added:', response.data);
+        alert(response.data.message);
         window.location.reload()
         
       } else {
@@ -30,19 +30,25 @@ const MovieForm = () => {
   };
 
   return (
-    <div>
+    <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }}
+  >
+    <div className='container'>
+<br/>
       <h2>Add Movie</h2>
-      <form onSubmit={handleAddMovie}>
-        <label>
-          Movie Title:
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-        </label>
-        <label>
-          Director ID:
-          <input type="number" value={directorId} onChange={(e) => setDirectorId(e.target.value)} />
-        </label>
+      <br/>
+      <form onSubmit={handleAddMovie} className='card'>
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required placeholder='Movie title' />
+        <br/>
+          <input type="number" value={directorId} onChange={(e) => setDirectorId(e.target.value)} required placeholder='Director ID'/>
+        <br/>
         <button type="submit">Add Movie</button>
       </form>
+    </div>
     </div>
   );
 };
